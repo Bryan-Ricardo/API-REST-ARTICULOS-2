@@ -41,6 +41,7 @@ const articulosPost = async(req,res)=>{
     //Guardar en BD
     await articulo.save();
     
+
     res.json({
         articulo
     })
