@@ -9,8 +9,9 @@ const sharp = require('sharp');
 //Mis importaciones
 const Articulo = require('../models/articulo');
 const Image = require('../models/image');
+const Venta = require('../models/venta');
 
-
+/*PETICIONES ARTICULOS */
 const articulosGet = async(req,res)=>{
     //console.log(uuidv4());
     const articulos = await Articulo.find();
@@ -36,7 +37,6 @@ const articulosPost = async(req,res)=>{
     const articulo = new Articulo({nombre,img,precio,cantidad,descripcion,estado});
     
     //Creando el id
-    //articulo.id = uuidv4();
 
     //Guardar en BD
     await articulo.save();
@@ -58,6 +58,7 @@ const articulosDelete = async(req,res)=>{
     })
 }
 
+/* PETICIONES PARA LA IMAGEN */
 
 const articulosImagenGet = async(req,res)=>{
     const {image} =req.params;
@@ -97,11 +98,60 @@ const articulosImagenPost = async(req,res)=>{
     console.log(imagen);
 }
 
+/*PETICION PARA LA VENTA */
+
+const ventaGet = async(req,res)=>{
+    //console.log(uuidv4());
+    const venta = await Venta.find();
+    res.json({
+        venta
+    })
+}
+
+const ventaPut = async(req,res)=>{
+    const {id} = req.params;
+    const {...resto} = req.body;
+
+    //Actualizar Articulo
+    const venta = await Venta.findByIdAndUpdate(id,resto);
+
+    res.json({
+        venta
+    })
+}
+
+const ventaPost = async(req,res)=>{
+    const {fecha,productos,estado} = req.body;
+    const venta = new Venta({fecha,productos,estado});
+
+    //Guardar en BD
+    await venta.save();
+    
+    res.json({
+        venta
+    })
+}
+
+const ventaDelete = async(req,res)=>{
+    const {id} = req.params;
+    const {...resto} = req.body;
+    resto.estado = false;
+    //Eliminar Articulo en la app 
+    const venta = await Venta.findByIdAndUpdate(id,resto);
+    res.json({
+        venta
+    })
+}
+
 module.exports = {
     articulosGet,
     articulosPut,
     articulosPost,
     articulosDelete,
     articulosImagenPost,
-    articulosImagenGet
+    articulosImagenGet,
+    ventaGet,
+    ventaPut,
+    ventaPost,
+    ventaDelete
 }
