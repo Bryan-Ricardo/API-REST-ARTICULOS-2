@@ -18,6 +18,10 @@ const CarritoSchema = Schema({
         type: Number,
         required:[true,'La cantidad es obligatoria'],
     },
+    cantidadMax:{
+        type: Number,
+        required:[true,'La cantidad es obligatoria'],
+    },
     descripcion:{
         type: String,
         default: "Sin descripcion"
