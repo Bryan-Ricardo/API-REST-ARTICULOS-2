@@ -9,7 +9,7 @@ const sharp = require('sharp');
 //Mis importaciones
 const Articulo = require('../models/articulo');
 const Image = require('../models/image');
-const Venta = require('../models/venta');
+const Carrito = require('../models/carrito');
 
 /*PETICIONES ARTICULOS */
 const articulosGet = async(req,res)=>{
@@ -98,48 +98,47 @@ const articulosImagenPost = async(req,res)=>{
     console.log(imagen);
 }
 
-/*PETICION PARA LA VENTA */
+/*PETICIONES PARA EL CARRITO*/
 
-const ventaGet = async(req,res)=>{
+const carritoGet = async(req,res)=>{
     //console.log(uuidv4());
-    const venta = await Venta.find();
+    const carrito = await Carrito.find();
     res.json({
-        venta
+        carrito
     })
 }
 
-const ventaPut = async(req,res)=>{
+const carritoPut = async(req,res)=>{
     const {id} = req.params;
     const {...resto} = req.body;
 
     //Actualizar Articulo
-    const venta = await Venta.findByIdAndUpdate(id,resto);
+    const carrito= await Carrito.findByIdAndUpdate(id,resto);
 
     res.json({
-        venta
+        carrito
     })
 }
 
-const ventaPost = async(req,res)=>{
-    const {fecha,productos,estado} = req.body;
-    const venta = new Venta({fecha,productos,estado});
+const carritoPost = async(req,res)=>{
+    const {nombre,img,precio,cantidad,descripcion,estado} = req.body;
+    const carrito = new Carrito({nombre,img,precio,cantidad,descripcion});
 
     //Guardar en BD
-    await venta.save();
+    await carrito.save();
     
     res.json({
-        venta
+        carrito
     })
 }
 
-const ventaDelete = async(req,res)=>{
+const carritoDelete = async(req,res)=>{
     const {id} = req.params;
     const {...resto} = req.body;
-    resto.estado = false;
     //Eliminar Articulo en la app 
-    const venta = await Venta.findByIdAndUpdate(id,resto);
+    const carrito = await Carrito.findByIdAndDelete(id,resto);
     res.json({
-        venta
+        "eliminado":true
     })
 }
 
@@ -150,8 +149,8 @@ module.exports = {
     articulosDelete,
     articulosImagenPost,
     articulosImagenGet,
-    ventaGet,
-    ventaPut,
-    ventaPost,
-    ventaDelete
+    carritoGet,
+    carritoPut,
+    carritoPost,
+    carritoDelete
 }

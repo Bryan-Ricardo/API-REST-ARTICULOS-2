@@ -6,8 +6,7 @@ const multer = require('multer');
 
 
 //Mis importaciones
-const { articulosGet, articulosPut, articulosPost, articulosDelete ,articulosImagenPost,articulosImagenGet,ventaGet,ventaPut,ventaPost,ventaDelete} = require('../controllers/articulos');
-
+const { articulosGet, articulosPut, articulosPost, articulosDelete ,articulosImagenPost,articulosImagenGet,carritoGet,carritoPut,carritoPost,carritoDelete} = require('../controllers/articulos');
 
 const router = Router();
 const storageStrategy = multer.memoryStorage();
@@ -27,13 +26,13 @@ router.post('/imagen',upload.single('imagen'),articulosImagenPost)
 
 router.get('/imagen/:image',articulosImagenGet)
 
-/*Venta Sola*/
-router.get('/venta',ventaGet);
+/*Carrito*/
+router.get('/carrito',carritoGet);
 
-router.put('/venta/:id',ventaPut);
+router.put('/carrito/:id',carritoPut);
 
-router.post('/venta',ventaPost);
+router.post('/carrito',carritoPost);
 
-router.delete('/venta/:id',ventaDelete);
+router.delete('/carrito/:id',carritoDelete);
 
 module.exports = router;
