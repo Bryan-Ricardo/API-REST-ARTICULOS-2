@@ -121,8 +121,8 @@ const carritoPut = async(req,res)=>{
 }
 
 const carritoPost = async(req,res)=>{
-    const {nombre,img,precio,cantidad,descripcion,cantidadMax} = req.body;
-    const carrito = new Carrito({nombre,img,precio,cantidad,descripcion,cantidadMax});
+    const {nombre,img,precio,cantidad,descripcion,cantidadMax,precioTotal} = req.body;
+    const carrito = new Carrito({nombre,img,precio,cantidad,descripcion,cantidadMax,precioTotal});
 
     //Guardar en BD
     await carrito.save();

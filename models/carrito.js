@@ -14,6 +14,10 @@ const CarritoSchema = Schema({
         type: Number,
         required:[true,'El precio es obligatorio'],
     },
+    precioTotal:{
+        type: Number,
+        required:[true,'El precio es obligatorio'],
+    },
     cantidad:{
         type: Number,
         required:[true,'La cantidad es obligatoria'],
