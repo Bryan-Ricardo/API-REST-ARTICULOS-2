@@ -1,6 +1,11 @@
 const {Schema,model} = require('mongoose');
 
 const VentaSchema = Schema({
+    fechaCompleta:{
+        type:String,
+        required:[true,'El nombre es obligatorio'],
+        unique:true
+    },
     fecha:{
         type:String,
         required:[true,'El nombre es obligatorio'],

@@ -166,8 +166,8 @@ const ventaPut = async(req,res)=>{
 }
 
 const ventaPost = async(req,res)=>{
-    const {fecha,hora,total,productos} = req.body;
-    const venta = new Venta({fecha,hora,total,productos});
+    const {fechaCompleta,fecha,hora,total,productos} = req.body;
+    const venta = new Venta({fechaCompleta,fecha,hora,total,productos});
 
     //Guardar en BD
     await venta.save();
