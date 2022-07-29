@@ -8,7 +8,11 @@ const VentaSchema = Schema({
     },
     hora: {
         type:String,
-        required:[true,'El nombre es obligatorio'],
+        required:[true,'La hora es obligatoria'],
+    },
+    total:{
+        type: Number,
+        required:[true,'El total es obligatorio'],
     },
     productos:{
 
