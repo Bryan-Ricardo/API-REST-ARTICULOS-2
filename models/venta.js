@@ -4,7 +4,6 @@ const VentaSchema = Schema({
     fecha:{
         type:String,
         required:[true,'El nombre es obligatorio'],
-        unique:true
     },
     hora: {
         type:String,
