@@ -10,6 +10,7 @@ const sharp = require('sharp');
 const Articulo = require('../models/articulo');
 const Image = require('../models/image');
 const Carrito = require('../models/carrito');
+const Venta = require('../models/venta');
 
 /*PETICIONES ARTICULOS */
 const articulosGet = async(req,res)=>{
@@ -142,6 +143,50 @@ const carritoDelete = async(req,res)=>{
     })
 }
 
+/*Metodos de Venta */
+
+const ventaGet = async(req,res)=>{
+    //console.log(uuidv4());
+    const venta = await Venta.find();
+    res.json({
+        venta
+    })
+}
+
+const ventaPut = async(req,res)=>{
+    const {id} = req.params;
+    const {...resto} = req.body;
+
+    //Actualizar Articulo
+    const venta = await Venta.findByIdAndUpdate(id,resto);
+
+    res.json({
+        venta
+    })
+}
+
+const ventaPost = async(req,res)=>{
+    const {fecha,productos} = req.body;
+    const venta = new Venta({fecha,productos});
+
+    //Guardar en BD
+    await venta.save();
+    
+    res.json({
+        venta
+    })
+}
+
+const ventaDelete = async(req,res)=>{
+    const {id} = req.params;
+    const {...resto} = req.body;
+    //Eliminar Articulo en la app 
+    const venta = await Venta.findByIdAndDelete(id,resto);
+    res.json({
+        "eliminado":true
+    })
+}
+
 module.exports = {
     articulosGet,
     articulosPut,
@@ -152,5 +197,9 @@ module.exports = {
     carritoGet,
     carritoPut,
     carritoPost,
-    carritoDelete
+    carritoDelete,
+    ventaGet,
+    ventaPut,
+    ventaPost,
+    ventaDelete
 }
